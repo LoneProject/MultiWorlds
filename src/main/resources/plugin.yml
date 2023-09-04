@@ -1,0 +1,16 @@
+name: MultiWorlds
+main: org.lone64.mws.MultiWorlds
+author: lone64
+version: 1.0.0
+api-version: '1.17'
+description: 월드 관리 플러그인
+permissions:
+  mws.admin:
+    default: op
+    description: 월드 관리 플러그인 관리자 권한
+commands:
+  mws:
+    aliases:
+      - multiworlds
+    permission: mws.admin
+    description: 월드 관리 플러그인 관리자 명령어
