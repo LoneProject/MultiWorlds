@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.lone64.mws.MultiWorlds;
 import org.lone64.mws.util.Util;
+import org.lone64.mws.util.file.Config;
 
 import java.io.File;
 
@@ -25,13 +26,16 @@ public class WorldManager {
 
     public WorldManager create(WorldType type) {
         WorldCreator worldCreator = new WorldCreator(getName());
-        worldCreator.environment(World.Environment.valueOf(type.name().toUpperCase())).createWorld();
+        worldCreator.environment(World.Environment.valueOf(type.name().toUpperCase()));
+        worldCreator.createWorld();
+        new Config("worlds.yml").setObject(getName(), "ofWorld");
         return this;
     }
 
     public WorldManager delete() {
         File file = new File(getName());
         if (file.exists() && Bukkit.unloadWorld(getName(), true)) {
+            new Config("worlds.yml").setObject(getName(), null);
             Util.deleteFile(file);
         }
         return this;
